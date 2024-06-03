@@ -1,3 +1,4 @@
+import HeroCarousel from '@/components/HeroCarousel'
 import SearchBar from '@/components/SearchBar'
 import Image from 'next/image'
 import React from 'react'
@@ -5,7 +6,7 @@ import React from 'react'
 const Home = () => {
   return (
     <>
-      <section className='px-6 border-2 md:px-20 py-24 border-red-400'>
+      <section className='px-6 border-2 md:px-20 py-24'>
           <div className='flex max-xl:flex-col gap-16'>
               <div className='flex flex-col justify-center'>
                 <p className='small-text '>
@@ -30,7 +31,7 @@ const Home = () => {
                 <SearchBar/>
               </div>
 
-              HeroCarousel
+              <HeroCarousel/>
           </div>
       </section>
 

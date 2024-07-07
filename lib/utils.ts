@@ -1,9 +1,20 @@
 export function ExtractPrice(...elements:any){
     for(const element of elements){
         const priceText = element.text().trim()
-        if(priceText) return priceText.replace(/[^0-9.]/g,'')
+        if(priceText) {
+            const cleanPrice = priceText.replace(/[^0-9.]/g,'');
+      
+            let firstPrice; 
+      
+            if (cleanPrice) {
+              firstPrice = cleanPrice.match(/\d+\.\d{2}/)?.[0];
+            } 
+      
+            return firstPrice || cleanPrice;
+        }
+        
     }
-
+    
     return '';
 }
 

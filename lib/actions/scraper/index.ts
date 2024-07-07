@@ -60,9 +60,9 @@ export async function ScrapeProduct(url:string){
             stars: 5.0,
             isOutofStock: outOfStock,
             description: description,
-            lowerPrice: Number(CPrice) || Number(Price),
-            higherPrice: Number(Price) || Number(CPrice),
-            average: Number(CPrice) || Number(Price)
+            lowestPrice: Number(CPrice) || Number(Price),
+            highestPrice: Number(Price) || Number(CPrice),
+            averagePrice: Number(CPrice) || Number(Price)
         }
         return data;
     }catch(err:any){

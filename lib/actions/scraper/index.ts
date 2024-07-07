@@ -1,4 +1,4 @@
-import { ExtractCurrency, ExtractPrice } from "@/lib/utils";
+import { ExtractCurrency, extractDescription, ExtractPrice } from "@/lib/utils";
 import axios from "axios";
 import * as cheerio from "cheerio";
 
@@ -46,22 +46,25 @@ export async function ScrapeProduct(url:string){
 
         const currency = ExtractCurrency($('.a-price-symbol'))
         const discountRate = $('.savingsPercentage').text().replace(/[-%]/g, "");
-        
+        const description = extractDescription($)
         const data = {
             url,
-            currency: currency || '$',
+            currency: currency || 'idr',
             image: imageUrls[0],
-            currentPrice: CPrice,
-            originalPrice: Price,
+            currentPrice: Number(CPrice) || Number(Price),
+            originalPrice: Number(Price) || Number(CPrice),
             priceHistory: [],
             discountRate: Number(discountRate),
             category: 'category',
             reviewsCount: 69,
             stars: 5.0,
-            isOutofStock: outOfStock
+            isOutofStock: outOfStock,
+            description: description,
+            lowerPrice: Number(CPrice) || Number(Price),
+            higherPrice: Number(Price) || Number(CPrice),
+            average: Number(CPrice) || Number(Price)
         }
-        console.log({title,CPrice,Price,outOfStock,imageUrls,currency,discountRate})
-
+        return data;
     }catch(err:any){
         throw new Error(`Failed to scrape the product : ${err.message}`)
     }

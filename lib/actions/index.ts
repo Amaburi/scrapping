@@ -36,3 +36,26 @@ export async function ScapeAndStoreProduct(productUrl: string){
         throw new Error(`failed to retrieve product: ${err.message}`);
     }
 }
+
+export async function getProductById(productId:string){
+    try{
+        connectTODB();
+        const product = await Product.findOne({_id: productId});
+
+        if(!product) return null;
+    }catch(err:any){
+        throw new Error(`failed to retrieve product: ${err.message}`);
+    }
+}
+
+
+export async function getAllProducts(){
+    try{
+        connectTODB();
+
+        const products = await Product.find();
+        return products
+    }catch(err:any){
+        throw new Error(`failed to retrieve product: ${err.message}`);
+    }
+}

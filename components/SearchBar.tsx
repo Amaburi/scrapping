@@ -1,4 +1,5 @@
 "use client";
+import { ScapeAndStoreProduct } from '@/lib/actions';
 import { hostname } from 'os';
 import React, { FormEvent, useState } from 'react'
 
@@ -22,7 +23,7 @@ const SearchBar = () => {
   }
   const [searchPrompt,setSearchPrompt] = useState('');
   const [isLoading, setisLoading] = useState(false)
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async(event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const isValidLink = isValidUrl(searchPrompt);
@@ -30,7 +31,7 @@ const SearchBar = () => {
 
     try {
       setisLoading(true)
-      
+      const product = await ScapeAndStoreProduct(searchPrompt)
     }catch(err){
       console.log(err)
     }finally {

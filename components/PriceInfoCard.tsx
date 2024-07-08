@@ -18,6 +18,7 @@ const PriceInfoCard = ({title,iconSrc,value,borderColor}:Props) => {
                 width={24}
                 height={24}
             />
+            <p className='text-xl font-bold text-slate-600'>{value}</p>
         </div>
     </div>
   )

@@ -26,6 +26,7 @@ export type PriceHistoryItem = {
     isOutOfStock: Boolean;
     users?: User[];
     percents: number;
+    bestSeller: string;
   };
   
   export type NotificationType =

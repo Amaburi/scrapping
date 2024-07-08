@@ -56,6 +56,7 @@ export async function ScrapeProduct(url:string){
         const ratingMatch = ratingText.match(/\d+(\.\d+)?/);
         const rating = ratingMatch ? ratingMatch[0] : null;
 
+        const bestSellerText = $('.zg-badge-wrapper .badge-link .p13n-best-seller-badge').text().trim();
         const data = {
             url,
             currency: currency || 'idr',
@@ -66,13 +67,14 @@ export async function ScrapeProduct(url:string){
             discountRate: Number(discountRate),
             category: 'category',
             reviewsCount: reviewCounts ,
-            stars: 4.3,
+            stars: rating,
             isOutofStock: outOfStock,
             description: description,
             lowestPrice: Number(CPrice) || Number(Price),
             highestPrice: Number(Price) || Number(CPrice),
             averagePrice: Number(CPrice) || Number(Price),
-            percents: 80
+            percents: 80,
+            bestSeller: bestSellerText ||''
         }
         return data;
     }catch(err:any){

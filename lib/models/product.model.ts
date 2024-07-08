@@ -23,6 +23,7 @@ const productSchema = new mongoose.Schema({
     category:{type: String},
     reviewsCount:{type: String},
     isOutOfStock:{type: Boolean, default: false},
+    bestSeller: {type: String},
     user:[
         {
             email:{type: String, required: true},

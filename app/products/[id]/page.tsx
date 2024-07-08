@@ -102,7 +102,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                     </div>
                   </div>
                   <p className='text-sm text-black opacity-50'>
-                    <span className='text-primary-green font-semibold'>{product.percents}</span>
+                    <span className='text-primary-green font-semibold'>{product.bestSeller}</span>
                   </p>
                 </div>
               </div>

@@ -47,6 +47,15 @@ export async function ScrapeProduct(url:string){
         const currency = ExtractCurrency($('.a-price-symbol'))
         const discountRate = $('.savingsPercentage').text().replace(/[-%]/g, "");
         const description = extractDescription($)
+
+        const ratingsText = $('#acrCustomerReviewText').text();
+        const ratingsMatch = ratingsText.match(/\d+/);
+        const reviewCounts = ratingsMatch ? ratingsMatch[0] : null;
+        
+        const ratingText = $('a.a-popover-trigger > span.a-size-base.a-color-base').text().trim();
+        const ratingMatch = ratingText.match(/\d+(\.\d+)?/);
+        const rating = ratingMatch ? ratingMatch[0] : null;
+
         const data = {
             url,
             currency: currency || 'idr',
@@ -56,13 +65,14 @@ export async function ScrapeProduct(url:string){
             priceHistory: [],
             discountRate: Number(discountRate),
             category: 'category',
-            reviewsCount: 69,
-            stars: 5.0,
+            reviewsCount: reviewCounts ,
+            stars: 4.3,
             isOutofStock: outOfStock,
             description: description,
             lowestPrice: Number(CPrice) || Number(Price),
             highestPrice: Number(Price) || Number(CPrice),
-            averagePrice: Number(CPrice) || Number(Price)
+            averagePrice: Number(CPrice) || Number(Price),
+            percents: 80
         }
         return data;
     }catch(err:any){

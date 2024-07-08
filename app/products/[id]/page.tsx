@@ -75,7 +75,34 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                     {product.currency}{formatNumber(product.currentPrice)}
                   </p>
                   <p className='text-[20px] text-red-500 opacoty-50 line-through'>
-                    {product.currency}{formatNumber(product.currentPrice)}
+                    {product.currency}{formatNumber(product.originalPrice)}
+                  </p>
+                </div>
+
+                <div className='flex flex-col gap-4'>
+                  <div className='flex gap-3'>
+                    <div className='product-stars'>
+                      <Image
+                        src="/assets/icons/star.svg"
+                        alt='icons'
+                        width={16}
+                        height={16}
+                      />
+                      <p className='text-sm text-primary-orange font-semibold'>{product.stars || '0'}</p>
+                    </div>
+
+                    <div className='product-reviews'>
+                        <Image
+                          src="/assets/icons/comment.svg"
+                          alt='icons'
+                          width={18}
+                          height={18}
+                        />
+                        <p className='text-sm font-mono text-black'>{product.reviewsCount || '0'} Reviews</p>
+                    </div>
+                  </div>
+                  <p className='text-sm text-black opacity-50'>
+                    <span className='text-primary-green font-semibold'>{product.percents}</span>
                   </p>
                 </div>
               </div>

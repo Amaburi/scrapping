@@ -25,6 +25,7 @@ export type PriceHistoryItem = {
     stars: number;
     isOutOfStock: Boolean;
     users?: User[];
+    percents: number;
   };
   
   export type NotificationType =

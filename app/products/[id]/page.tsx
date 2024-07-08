@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Product } from '@/types';
 import Link from 'next/link';
 import { formatNumber } from '@/lib/utils';
+import PriceInfoCard from '@/components/PriceInfoCard';
 
 interface Props{
   params: { id: string }
@@ -104,8 +105,21 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                   <p className='text-sm text-black opacity-50'>
                     <span className='text-primary-green font-semibold'>{product.bestSeller}</span>
                   </p>
+                  <p className='text-sm text-black opacity-50'>halo</p>
                 </div>
               </div>
+
+              <div className='my-7 flex flex-col gap-5'>
+                <div className='flex gap-5 flex-wrap'>
+                  <PriceInfoCard
+                    title='Current Price'
+                    iconSrc="/assets/icons/price-tag.svg"
+                    value={`${product.currency} ${formatNumber(product.currentPrice)}`}
+                    borderColor="#b6dbff"
+                  />
+                </div>
+              </div>
+
             </div>
           </div>
         </div>

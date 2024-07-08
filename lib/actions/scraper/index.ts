@@ -57,6 +57,8 @@ export async function ScrapeProduct(url:string){
         const rating = ratingMatch ? ratingMatch[0] : null;
 
         const bestSellerText = $('.zg-badge-wrapper .badge-link .p13n-best-seller-badge').text().trim();
+        const boughtText = $('#social-proofing-faceout-title-tk_bought').text().trim();
+
         const data = {
             url,
             currency: currency || 'idr',

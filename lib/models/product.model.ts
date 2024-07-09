@@ -24,11 +24,9 @@ const productSchema = new mongoose.Schema({
     reviewsCount:{type: String},
     isOutOfStock:{type: Boolean, default: false},
     bestSeller: {type: String},
-    user:[
-        {
-            email:{type: String, required: true},
-        }
-    ],default:[]
+    users: [
+        {email: { type: String, required: true}}
+    ], default: [],
 },{timestamps:true})
 
 const Product = mongoose.models.Product || mongoose.model('Product',productSchema);

@@ -3,7 +3,7 @@
 import { FormEvent, Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import Image from 'next/image'
-//import { addUserEmailToProduct } from '@/lib/actions'
+import { addUserEmailToProduct } from '@/lib/actions'
 
 interface Props {
   productId: string
@@ -18,7 +18,7 @@ const Modal = ({ productId }: Props) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // await addUserEmailToProduct(productId, email);
+    await addUserEmailToProduct(productId, email);
 
     setIsSubmitting(false)
     setEmail('')
@@ -31,7 +31,7 @@ const Modal = ({ productId }: Props) => {
 
   return (
     <>
-      <button type="button" className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[210px]" onClick={openModal}>
+      <button type="button" className="btn" onClick={openModal}>
         Track
       </button>
 
@@ -39,7 +39,7 @@ const Modal = ({ productId }: Props) => {
         <Dialog as="div" onClose={closeModal} className="dialog-container">
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
-              as="div" // Ensure that Transition.Child renders an actual element
+              as="div"
               enter="ease-out duration-300"
               enterFrom="opacity-0"
               enterTo="opacity-100"
@@ -47,7 +47,6 @@ const Modal = ({ productId }: Props) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="fixed inset-0 bg-black bg-opacity-25" />
             </Transition.Child>
 
             <span
@@ -56,7 +55,7 @@ const Modal = ({ productId }: Props) => {
             />
             
             <Transition.Child
-              as="div" // Ensure that Transition.Child renders an actual element
+              as="div"
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"

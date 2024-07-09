@@ -60,3 +60,19 @@ export async function getAllProducts(){
         throw new Error(`failed to retrieve product: ${err.message}`);
     }
 }
+export async function getSimiliarProduct(productId:string){
+    try{
+        connectTODB();
+
+        const currentProduct = await Product.findById(productId);
+
+        if(!currentProduct)return null;
+
+        const similiarProduct = await Product.find({
+            _id: {$ne:productId}
+        }).limit(3)
+        return similiarProduct;
+    }catch(err:any){
+        throw new Error(`failed to retrieve product: ${err.message}`);
+    }
+}

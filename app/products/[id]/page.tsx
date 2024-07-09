@@ -1,10 +1,12 @@
-import { getProductById } from '@/lib/actions';
+import { getProductById, getSimiliarProduct } from '@/lib/actions';
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
 import { Product } from '@/types';
 import Link from 'next/link';
 import { formatNumber } from '@/lib/utils';
 import PriceInfoCard from '@/components/PriceInfoCard';
+import ProductCard from '@/components/ProductCard';
+import Modal from '@/components/Modal';
 
 interface Props{
   params: { id: string }
@@ -15,6 +17,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
 
   if (!product) redirect('/');
 
+  const similiarProduct = await getSimiliarProduct(id)
   return (
     <div className='product-container'>
       <div className='flex gap-28 xl:flex-row flex-col'>
@@ -137,9 +140,41 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                 />
               </div>
             </div>
+            <Modal/>
           </div>
         </div>
       </div>
+      <div className='flex flex-col gap-16 border-2 border-slate-600'>
+          <div className='flex flex-col gap-5'>
+            <h3 className='text-2xl text-secondary font-semibold'>
+              Product Description
+            </h3>
+            <div className='flex flex-col gap-4'>
+              {product?.description?.split('\n')}
+            </div>
+          </div>
+          <button className='btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[210px]'>
+            <Image
+              src="/assets/icons/bag.svg"
+              alt='check'
+              width={25}
+              height={25}
+            />
+            <Link href='/' className='text-base text-white'>
+              Buy Now
+            </Link>
+          </button>
+      </div>
+      {similiarProduct&& similiarProduct?.length > 0 && (
+        <div className='py-14 flex flex-col gap2 w-full'>
+          <p className='section-text'>Similiar Product</p>
+          <div className='flex flex-wrap gap-10 w-full mt-7'>
+            {similiarProduct.map((product) =>(
+              <ProductCard key={product._id} product={product}/>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

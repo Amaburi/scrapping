@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        customBlue: '#007BFF',
         primary: {
           DEFAULT: "#E43030",
           "orange": "#D48D3B",

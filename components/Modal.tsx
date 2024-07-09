@@ -31,7 +31,7 @@ const Modal = ({ productId }: Props) => {
 
   return (
     <>
-      <button type="button" className="btn" onClick={openModal}>
+      <button type="button" className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[210px]" onClick={openModal}>
         Track
       </button>
 

@@ -4,6 +4,8 @@ import Product from "../models/product.model";
 import { ScrapeProduct } from "./scraper";
 import { connectTODB } from "./scraper/db";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from '../utils';
+import { User } from "@/types";
+import { generateEmailBody } from "../nodemailer";
 export async function ScapeAndStoreProduct(productUrl: string){
     if(!productUrl)return;
     try{
@@ -74,5 +76,25 @@ export async function getSimiliarProduct(productId:string){
         return similiarProduct;
     }catch(err:any){
         throw new Error(`failed to retrieve product: ${err.message}`);
+    }
+}
+
+export async function addUserEmailToProduct(productId: string, userEmail : string){
+    try{
+        const product = await Product.findById(productId);
+
+        if(!product) return;
+        const userExists = product.users.some((user:User)=> user.email === userEmail);
+
+        if(!userExists){
+            product.users.push({email: userEmail});
+
+            await product.save();
+            const emailContent = generateEmailBody(product,"WELCOME")
+
+            await sendEmail(emailContent,[userEmail]);
+        }
+    }catch(err:any){
+        throw new Error(`failed to add user email to product: ${err.message}`);
     }
 }

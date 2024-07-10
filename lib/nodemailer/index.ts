@@ -8,12 +8,12 @@ const Notification = {
   CHANGE_OF_STOCK: 'CHANGE_OF_STOCK',
   LOWEST_PRICE: 'LOWEST_PRICE',
   THRESHOLD_MET: 'THRESHOLD_MET',
-};
+}
 
 export async function generateEmailBody(
   product: EmailProductInfo,
   type: NotificationType
-) {
+  ) {
   const THRESHOLD_PERCENTAGE = 40;
   // Shorten the product title
   const shortenedTitle =
@@ -88,9 +88,10 @@ const transporter = nodemailer.createTransport({
     user: 'LeMineralJee@outlook.com',
     pass: process.env.EMAIL_PASSWORD,
   },
-  maxConnections: 1
+  maxConnections: 1,
 });
 
+// Send email function
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
   const mailOptions = {
     from: 'LeMineralJee@outlook.com',
@@ -101,8 +102,8 @@ export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) =>
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent: ', info);
-  } catch (error:any) {
-    console.log('Error sending email: ', error.message);
+    console.log('Email sent:', info);
+  } catch (error: any) {
+    console.error('Error sending email:', error.message);
   }
 };

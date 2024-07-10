@@ -2,7 +2,7 @@ import { ScrapeProduct } from "@/lib/actions/scraper";
 import { connectTODB } from "@/lib/actions/scraper/db";
 import Product from "@/lib/models/product.model";
 import { generateEmailBody, sendEmail } from "@/lib/nodemailer";
-import { getAveragePrice, getEmailNotifType, getHighestPrice, getLowestPrice, getLowestPrice } from "@/lib/utils";
+import { getAveragePrice, getEmailNotifType, getHighestPrice, getLowestPrice } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 export async function GET(){

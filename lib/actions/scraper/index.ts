@@ -50,11 +50,11 @@ export async function ScrapeProduct(url:string){
 
         const ratingsText = $('#acrCustomerReviewText').text();
         const ratingsMatch = ratingsText.match(/\d+/);
-        const reviewCounts = ratingsMatch ? ratingsMatch[0] : null;
+        const reviewCounts = ratingsMatch ? ratingsMatch[0] : '0';
         
         const ratingText = $('a.a-popover-trigger > span.a-size-base.a-color-base').text().trim();
         const ratingMatch = ratingText.match(/\d+(\.\d+)?/);
-        const rating = ratingMatch ? ratingMatch[0] : null;
+        const rating = ratingMatch ? ratingMatch[0] : '0';
 
         const bestSellerText = $('.zg-badge-wrapper .badge-link .p13n-best-seller-badge').text().trim();
         const boughtText = $('#social-proofing-faceout-title-tk_bought').text().trim();
@@ -72,7 +72,7 @@ export async function ScrapeProduct(url:string){
             category: 'category',
             reviewsCount: reviewCounts ,
             stars: rating,
-            isOutofStock: outOfStock,
+            isOutOfStock: outOfStock,
             description: description,
             lowestPrice: Number(CPrice) || Number(Price),
             highestPrice: Number(Price) || Number(CPrice),

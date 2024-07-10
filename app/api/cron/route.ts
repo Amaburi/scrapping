@@ -1,7 +1,9 @@
 import { ScrapeProduct } from "@/lib/actions/scraper";
 import { connectTODB } from "@/lib/actions/scraper/db";
 import Product from "@/lib/models/product.model";
+import { generateEmailBody, sendEmail } from "@/lib/nodemailer";
 import { getAveragePrice, getEmailNotifType, getHighestPrice, getLowestPrice, getLowestPrice } from "@/lib/utils";
+import { NextResponse } from "next/server";
 
 export async function GET(){
     try{
@@ -32,8 +34,23 @@ export async function GET(){
 
                 //2
                 const emailNotif = getEmailNotifType(scrapedProduct,currentProduct);
+
+                if(emailNotif && updatedProduct.users.length > 0) {
+                    const productInfo = {
+                        title: updatedProduct.title,
+                        url: updatedProduct.url
+                    }
+
+                    const emailContent = await generateEmailBody(productInfo, emailNotif);
+                    const userEmails = updatedProduct.users.map((user:any)=> user.email)
+                    await sendEmail(emailContent, userEmails);
+                }
+                return updatedProduct;
             })
         )
+        return NextResponse.json({
+            message:'OK',data: updateProduct
+        })
     }catch(err){
         throw new Error(`Error in GET: ${err.message}`);
     }

@@ -57,6 +57,7 @@ export async function getAllProducts(){
         connectTODB();
 
         const products = await Product.find();
+        
         return products
     }catch(err:any){
         throw new Error(`failed to retrieve product: ${err.message}`);
@@ -91,7 +92,7 @@ export async function addUserEmailToProduct(productId: string, userEmail: string
       if(!userExists) {
         product.users.push({ email: userEmail });
         if (!product.title) {
-            product.title = "Your Product"; // Provide a default or set it based on your logic
+            product.title = "Your Product"; 
         }
         await product.save();
   

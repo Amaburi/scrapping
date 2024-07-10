@@ -61,8 +61,10 @@ export async function ScrapeProduct(url:string){
 
         const data = {
             url,
+            
             currency: currency || 'idr',
             image: imageUrls[0],
+            title,
             currentPrice: Number(CPrice) || Number(Price),
             originalPrice: Number(Price) || Number(CPrice),
             priceHistory: [],
@@ -76,6 +78,7 @@ export async function ScrapeProduct(url:string){
             highestPrice: Number(Price) || Number(CPrice),
             averagePrice: Number(CPrice) || Number(Price),
             percents: 80,
+            
             bestSeller: bestSellerText ||''
         }
         return data;

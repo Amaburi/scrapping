@@ -51,7 +51,7 @@ export async function GET(){
         return NextResponse.json({
             message:'OK',data: updateProduct
         })
-    }catch(err){
+    }catch(err:any){
         throw new Error(`Error in GET: ${err.message}`);
     }
 }
